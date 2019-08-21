@@ -18,7 +18,7 @@ Create new file `HelloWorld.ts`
 
 ```js
 function helloWorld(count){
-	return ('hello world' + count);
+  return ('hello world' + count);
 }
 
 const result = helloWorld(3);
@@ -53,7 +53,7 @@ Now run `npm run tsc` and notice the `implicitly any` errors. Fix them by adding
 
 ```js
 function helloWorld(count: number): string {
-	return 'hello world ' + count;
+  return 'hello world ' + count;
 }
 
 const result: string = helloWorld(3);
@@ -76,9 +76,9 @@ Create `HelloWorld.spec.ts`
 import hello from './HelloWorld3'
 
 describe('HelloWorld', () => {
-	it('returns a string', () => {
-		expect(hello(3)).toEqual('hello world 3');
-	});
+  it('returns a string', () => {
+    expect(hello(3)).toEqual('hello world 3');
+  });
 });
 ```
 We have an issue, Jest needs to be configured to work with Typescript. We need to install a loader to work with typscript files. 
@@ -122,11 +122,11 @@ Create another file called `App.js`
 
 ```javascript
 const App = (props) => {
-	return (
-			React.createElement('div', {}, 
-					React.createElement('p', {}, 'Hello world!')
-				)
-		)
+  return (
+      React.createElement('div', {}, 
+          React.createElement('p', {}, 'Hello world!')
+        )
+    )
 }
 ```
 
@@ -145,8 +145,8 @@ Add the `build` command to your `package.json` file:
 
 ```json
 "scripts": {
-	//...
-	"build": "webpack --config webpack.config.js"
+  //...
+  "build": "webpack --config webpack.config.js"
 }
 ```
 
@@ -160,9 +160,9 @@ Inside `webpack.config.js`
 
 ```javascript
 module.exports = function(env, argv) {
-  	return {
-    	entry: './src/index.js',
-	}
+    return {
+      entry: './src/index.js',
+  }
 }
 ```
 
