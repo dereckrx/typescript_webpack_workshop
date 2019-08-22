@@ -116,7 +116,7 @@ Create a `index.html` file:
 
 Notice we are importing the react and react-dom and libraries from a cdn and not from npm. Take a moment to understand the difference between these two ways of using javascript in html.
 
-We will also start by not using any JSX. Here we will use react DOM to render our App component at the root div.
+We will also start by not using any JSX (More on JSX later). Here we will use react DOM to render our App component at the root div.
 
 Create another file called `App.js`
 
