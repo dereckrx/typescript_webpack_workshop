@@ -1,18 +1,12 @@
 ## Webpack Typscript Workshop
 
-Init project: 
+Lets create a new directory and init.
 
 ```bash
 $ mkdir webpack_ts
+$ cd webpack_ts
 $ npm init
-$ npm install --save typescript
 ```
-
-in package.json lets add the typscript compile command to `scripts` section so we can run it with the `npm` command.
-    
-    "tsc": "tsc"
-
-Run `npm run tsc` and look at the output to see info on the tsc command.
 
 Create new file `HelloWorld.ts`
 
@@ -24,24 +18,45 @@ function helloWorld(count){
 const result = helloWorld(3);
 console.log(result);
 ```
+Now lets add the typescript dependency to our project so we can transpile our ts code into js. 
 
-Compile it with `tsc`
+`npm install --save typescript`
 
-```bash
-$ npm run tsc HelloWorld.ts
+This adds the typescript executable to our `node_modules` folder.
+Compile with `./node_modules/typescript/bin/tsc HelloWorld.ts`
+
+Look at the output file `HelloWorld.js`, notice that it's not much different from the `.ts` file.
+
+Now let's install node. Node will allow us to run javascript in our terminal and anywhere outside the browser.
+
+```sh
+node -v
+brew install node # If you need to install
 ```
+Now run our js file. `$ node HelloWorld.js`
 
-Look at output `HelloWorld.js`, notice that it's not much different from the `.ts` file.
+What do you see?
 
-Run `$ npm run tsc HelloWorld.ts && node HelloWorld.js` to compile and then run the outputted file with `node`.
+Now lets make it easier to compile our typescript files by adding a script to our `package.json`
 
-Add this command to the npm scripts to make it easier to run:
+Add the `tsc` command from our node modules to the `scripts` section of our `package.json`.
+This will allow us to run it using the `npm run` command instead of going through `node_modules`.
+
+`"tsc": "tsc"`
+
+Run `npm run tsc` and look at the output to see info on the tsc command.
+
+We can combine them `$ npm run tsc HelloWorld.ts && node HelloWorld.js` to compile and then run the outputted file with `node`.
+
+Add this command to the npm `scripts` to make it easier to run:
 
 ```
 "hello": "tsc HelloWorld.ts && node HelloWorld.js"
 ```
 
-Run: `$ npm run hello`
+Run it with: `$ npm run hello`
+
+You can add all sorts of custom convenience scripts to your `package.json`!
 
 Now lets generate a Typescript config file to customize it for our project.
 
@@ -60,11 +75,15 @@ const result: string = helloWorld(3);
 console.log(result);
 ```
 
-Take a moment to play around with passing invalid types to helloWorld, and returning invalid types to see typescript errors by running `npm run hello`.
+Take a moment to play around with passing invalid types to helloWorld, 
+and returning invalid types to see typescript errors by running `npm run hello`.
 
-Lets tell Typescript where to put our compiled javascript to keep our project clean. Change `tsconfig.json` `"outDir": "./output",` and rerun `npm run tsc`. Notice new `output` dir in your project directory.
+Lets tell Typescript where to put our compiled javascript to keep our project clean. 
+Change `tsconfig.json` `"outDir": "./output",` and rerun `npm run tsc`. Notice new `output` dir in your project directory.
 
-Lets install jest so can start writing tests.
+### Testing with Jest
+
+Install jest so can start writing tests.
 
 `npm install --save-dev jest`
 
@@ -81,16 +100,23 @@ describe('HelloWorld', () => {
   });
 });
 ```
-We have an issue, Jest needs to be configured to work with Typescript. We need to install a loader to work with typscript files. 
+Try to run the jest tests. What happens?
 
-Install the Typescript loader for jest as well as the `@type` definitions for jest so Typescript can compile Jest files
+We have an issue, Jest needs to be configured to work with Typescript. 
+We need to install a dev dependency that will transpile our specs into javascript so 
+Jest can run our Typescript files. 
+
+Install the Typescript loader for jest as well as the `@type` definitions 
+for jest so Typescript can compile Jest files.
 
 ```bash
 npm install --save-dev ts-jest
 npm install --save-dev @types/jest
 ```
 
-Now lets try running our test `npm test` and make sure they're green.
+We need to create a configuration for `ts-jest` run: `$ npx ts-jest config:init`
+
+Now lets try running our test `npm test`. Fix any issues until the tests are green.
 
 ## Part 2
 
